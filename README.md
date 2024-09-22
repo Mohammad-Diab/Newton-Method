@@ -6,7 +6,7 @@ A small Windows app that finds a root of an equation f(x) = 0 with Newton's meth
 
 - Type the function in x, or build it with the on-screen buttons: **x**, **^**, **√x**, **∛x**, **π** and **e**. The operators are `+`, `-`, `*`, `/` and `^`.
 - Set the search interval with **Domain** (**From** / **To**).
-- Stop either by precision (**ε**, up to 0.025) or after a fixed number of iterations (**Iter-Max**, 1 to 100): fill one of the two.
+- Stop either by precision (**ε**, up to 0.025) or after a fixed number of iterations (**Iter-Max**, 1 to 100): fill one of the two. With ε it gives up after 100 iterations.
 - **Newton** checks that f(a) · f(b) < 0, picks the starting point x0 from the sign of f · f'' at the ends of the interval, then iterates x(n+1) = x(n) − f(x(n)) / f'(x(n)) and reports the root, the number of iterations and |f(x)|.
 - Every step is written to the log box; **Clear History** empties it.
 
