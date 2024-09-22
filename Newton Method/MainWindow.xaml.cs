@@ -136,9 +136,15 @@ namespace Newton_Method
                                         MessageBox.Show("Done.", "Newton Method", MessageBoxButton.OK, MessageBoxImage.Information);
                                     }
                                 }
+                                else if (x1 == 0 || x2 == 0)
+                                {
+                                    textBox6.Text = string.Concat(textBox6.Text, " = 0 so x = ", x1 == 0 ? textBox3.Text : textBox4.Text, " is a root of the function.\n");
+                                    textBox6.Text = string.Concat(textBox6.Text, "Done.\n****************************************\n");
+                                    MessageBox.Show("Done.", "Newton Method", MessageBoxButton.OK, MessageBoxImage.Information);
+                                }
                                 else
                                 {
-                                    textBox6.Text = string.Concat(textBox6.Text, " >= 0 there is no solution.\n");
+                                    textBox6.Text = string.Concat(textBox6.Text, " > 0 there is no solution.\n");
                                     textBox6.Text = string.Concat(textBox6.Text, "\n****************************************\n");
                                     MessageBox.Show("No solution for this function in this domain!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                                 }
