@@ -94,8 +94,8 @@ namespace Newton_Method
                                 textBox6.Text = string.Concat(textBox6.Text, "O: f(a) * f(b) = ", x1 * x2);
                                 if (x1 * x2 < 0)
                                 {
-                                    double d2a = d2f(double.Parse(textBox3.Text), Oprand, Operation, epsillon);
-                                    double d2b = d2f(double.Parse(textBox4.Text), Oprand, Operation, epsillon);
+                                    double d2a = d2f(double.Parse(textBox3.Text), Oprand, Operation);
+                                    double d2b = d2f(double.Parse(textBox4.Text), Oprand, Operation);
                                     textBox6.Text = string.Concat(textBox6.Text, " < 0 there is a solution.\n");
                                     textBox6.Text = string.Concat(textBox6.Text, "O: f''(a) = ", d2a, "\n");
                                     textBox6.Text = string.Concat(textBox6.Text, "O: f''(b) = ", d2b, "\n");
@@ -173,7 +173,7 @@ namespace Newton_Method
             iter = 1;
             do
             {
-                double d1x0 = Math.Abs(df(x0, Oprand, Operation, epsillon));
+                double d1x0 = Math.Abs(df(x0, Oprand, Operation));
                 if (d1x0 < epsillon)
                 {
                     textBox6.Text = string.Concat(textBox6.Text, "O: |f'(x0)| = ", d1x0, " this equation can not be solved in Newton Method.\n");
@@ -182,7 +182,7 @@ namespace Newton_Method
                 }
                 if (iter == 1)
                     textBox6.Text = string.Concat(textBox6.Text, "O: |f'(x0)| = ", d1x0, " > 0 this equation can be solved in Newton Method.\n");
-                x1 = x0 - (f(x0, Oprand, Operation) / df(x0, Oprand, Operation, epsillon));
+                x1 = x0 - (f(x0, Oprand, Operation) / df(x0, Oprand, Operation));
                 textBox6.Text = string.Concat(textBox6.Text, "O: x", iter, " = x", iter - 1, " -[f(x", iter - 1, ") / f'(x", iter - 1, ")] = ", x1, "\n");
                 if (Math.Abs(x1 - x0) <= epsillon)
                 {
@@ -210,7 +210,7 @@ namespace Newton_Method
             iter = 1;
             do
             {
-                double d1x0 = Math.Abs(df(x0, Oprand, Operation, epsillon));
+                double d1x0 = Math.Abs(df(x0, Oprand, Operation));
                 if (d1x0 < epsillon)
                 {
                     textBox6.Text = string.Concat(textBox6.Text, "O: |f'(x0)| = ", d1x0, " this equation can not be solved in Newton Method.\n");
@@ -219,7 +219,7 @@ namespace Newton_Method
                 }
                 if (iter == 1)
                     textBox6.Text = string.Concat(textBox6.Text, "O: |f'(x0)| = ", d1x0, " > 0 this equation can be solved in Newton Method.\n");
-                x1 = x0 - (f(x0, Oprand, Operation) / df(x0, Oprand, Operation, epsillon));
+                x1 = x0 - (f(x0, Oprand, Operation) / df(x0, Oprand, Operation));
                 textBox6.Text = string.Concat(textBox6.Text, "O: x", iter, " = x", iter - 1, " -[f(x", iter - 1, ") / f'(x", iter - 1, ")] = ", x1, "\n");
                 if (iter == iter_Max)
                 {
@@ -259,14 +259,16 @@ namespace Newton_Method
             return Assignment(D[0], x0);
         }
 
-        private double df(double x0, Stack<string> Oprand, Stack<string> Operation, double epsillon)
+        private double df(double x0, Stack<string> Oprand, Stack<string> Operation)
         {
-            return (f(x0, Oprand, Operation) - f(x0 - epsillon, Oprand, Operation)) / epsillon;
+            double h = 1e-6 * Math.Max(1, Math.Abs(x0));
+            return (f(x0 + h, Oprand, Operation) - f(x0 - h, Oprand, Operation)) / (2 * h);
         }
 
-        private double d2f(double x0, Stack<string> Oprand, Stack<string> Operation, double epsillon)
+        private double d2f(double x0, Stack<string> Oprand, Stack<string> Operation)
         {
-            return (df(x0, Oprand, Operation, epsillon) - df(x0 - epsillon, Oprand, Operation, epsillon)) / epsillon;
+            double h = 1e-4 * Math.Max(1, Math.Abs(x0));
+            return (f(x0 + h, Oprand, Operation) - 2 * f(x0, Oprand, Operation) + f(x0 - h, Oprand, Operation)) / (h * h);
         }
 
         private bool read(ref Stack<string> Oprand, ref Stack<string> Operation)
