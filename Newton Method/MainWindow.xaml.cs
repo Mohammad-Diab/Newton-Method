@@ -53,7 +53,13 @@ namespace Newton_Method
                 int err = -1;
                 int iter = 0;
                 textBox6.Text = string.Concat(textBox6.Text, "O: Check if all necessary fields are filled.\n");
-                if (textBox1.Text.Length != 0 && textBox3.Text.Length != 0 && textBox4.Text.Length != 0 && (Xor(textBox2.Text.Length != 0, textBox5.Text.Length != 0)))
+                if (textBox2.Text.Length != 0 && textBox5.Text.Length != 0)
+                {
+                    textBox6.Text = string.Concat(textBox6.Text, "E: You wrote ε and Iter-Max at the same time, fill only one of them.\n");
+                    textBox6.Text = string.Concat(textBox6.Text, "\n****************************************\n");
+                    MessageBox.Show("Please fill only one of ε and Iter-Max!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else if (textBox1.Text.Length != 0 && textBox3.Text.Length != 0 && textBox4.Text.Length != 0 && (Xor(textBox2.Text.Length != 0, textBox5.Text.Length != 0)))
                 {
                     textBox6.Text = string.Concat(textBox6.Text, "O: Try to read the function.\n");
                     if (read(ref Oprand, ref Operation) == true)
@@ -160,7 +166,7 @@ namespace Newton_Method
                 }
                 else
                 {
-                    textBox6.Text = string.Concat(textBox6.Text, "E: Some necessary fields are empty, or you wrote ε and Iter-Max at the same time.\n");
+                    textBox6.Text = string.Concat(textBox6.Text, "E: Some necessary fields are empty.\n");
                     textBox6.Text = string.Concat(textBox6.Text, "\n****************************************\n");
                     MessageBox.Show("Please fill the function, the domain and either ε or Iter-Max!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
