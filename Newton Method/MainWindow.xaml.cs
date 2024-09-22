@@ -177,6 +177,7 @@ namespace Newton_Method
                 textBox6.Text = string.Concat(textBox6.Text, "\n****************************************\n");
                 MessageBox.Show("Unexpected error!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            textBox6.ScrollToEnd();
         }
 
         private int Solve(double x0, double epsillon, ref int err, int iter, ref double root, Stack<string> Oprand, Stack<string> Operation)
