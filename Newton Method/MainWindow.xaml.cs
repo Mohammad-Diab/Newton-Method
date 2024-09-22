@@ -52,7 +52,7 @@ namespace Newton_Method
                 Stack<string> Oprand = new Stack<string>();
                 int err = -1;
                 int iter = 0;
-                textBox6.Text = string.Concat(textBox6.Text, "O: Check if all necessary field is full.\n");
+                textBox6.Text = string.Concat(textBox6.Text, "O: Check if all necessary fields are filled.\n");
                 if (textBox1.Text.Length != 0 && textBox3.Text.Length != 0 && textBox4.Text.Length != 0 && (Xor(textBox2.Text.Length != 0, textBox5.Text.Length != 0)))
                 {
                     textBox6.Text = string.Concat(textBox6.Text, "O: Try to read the function.\n");
@@ -66,15 +66,15 @@ namespace Newton_Method
                                 epsillon = double.Parse(textBox2.Text);
                             if (epsillon > 0.025 || epsillon < Double.Epsilon)
                             {
-                                textBox6.Text = string.Concat(textBox6.Text, "E: Epsillon must be in this domain ]0,0.025].\n");
+                                textBox6.Text = string.Concat(textBox6.Text, "E: ε must be in this domain ]0,0.025].\n");
                                 textBox6.Text = string.Concat(textBox6.Text, "\n****************************************\n");
-                                MessageBox.Show("Epsillon must be in this domain!\n]0,0.025]", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                MessageBox.Show("ε must be in this domain!\n]0,0.025]", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                             }
                             else if (Math.Abs(double.Parse(textBox3.Text) - double.Parse(textBox4.Text)) < epsillon)
                             {
-                                textBox6.Text = string.Concat(textBox6.Text, "E: Domain bound mustn't be identical.\n");
+                                textBox6.Text = string.Concat(textBox6.Text, "E: Domain bounds mustn't be identical.\n");
                                 textBox6.Text = string.Concat(textBox6.Text, "\n****************************************\n");
-                                MessageBox.Show("Domain bound mustn't be identical!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                MessageBox.Show("Domain bounds mustn't be identical!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                             }
                             else if (textBox5.Text.Length != 0 && (int.Parse(textBox5.Text) < 1 || int.Parse(textBox5.Text) > 100))
                             {
@@ -102,7 +102,7 @@ namespace Newton_Method
                                     textBox6.Text = string.Concat(textBox6.Text, "O: f(a) * f''(a) = ", x1 * d2a);
                                     if (x1 * d2a > 0)
                                     {
-                                        textBox6.Text = string.Concat(textBox6.Text, " >= 0 so x0 = ", textBox3.Text, "\n");
+                                        textBox6.Text = string.Concat(textBox6.Text, " > 0 so x0 = ", textBox3.Text, "\n");
                                         x0 = double.Parse(textBox3.Text);
                                     }
                                     else
@@ -128,7 +128,7 @@ namespace Newton_Method
                                     else if (err == 2)
                                     {
                                         textBox6.Text = string.Concat(textBox6.Text, "\n****************************************\n");
-                                        MessageBox.Show("Can't Solve this equation!", "Newton Method", MessageBoxButton.OK, MessageBoxImage.Information);
+                                        MessageBox.Show("Can't solve this equation!", "Newton Method", MessageBoxButton.OK, MessageBoxImage.Information);
                                     }
                                     else if (err == 1)
                                     {
@@ -138,7 +138,7 @@ namespace Newton_Method
                                 }
                                 else
                                 {
-                                    textBox6.Text = string.Concat(textBox6.Text, " > 0 there is not a solution\n");
+                                    textBox6.Text = string.Concat(textBox6.Text, " >= 0 there is no solution.\n");
                                     textBox6.Text = string.Concat(textBox6.Text, "\n****************************************\n");
                                     MessageBox.Show("No solution for this function in this domain!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                                 }
@@ -147,16 +147,16 @@ namespace Newton_Method
                     }
                     else
                     {
-                        textBox6.Text = string.Concat(textBox6.Text, "E: Function Can not be read.\n");
+                        textBox6.Text = string.Concat(textBox6.Text, "E: Function can not be read.\n");
                         textBox6.Text = string.Concat(textBox6.Text, "\n****************************************\n");
-                        MessageBox.Show("Function was not recognise!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Function was not recognised!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 else
                 {
-                    textBox6.Text = string.Concat(textBox6.Text, "E: there is some necessary fields is empty or you wrote ε and max iteration in same time.\n");
+                    textBox6.Text = string.Concat(textBox6.Text, "E: Some necessary fields are empty, or you wrote ε and Iter-Max at the same time.\n");
                     textBox6.Text = string.Concat(textBox6.Text, "\n****************************************\n");
-                    MessageBox.Show("Please complete all necessary fields!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Please fill the function, the domain and either ε or Iter-Max!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (FormatException)
@@ -167,7 +167,7 @@ namespace Newton_Method
             }
             catch (Exception er)
             {
-                textBox6.Text = string.Concat(textBox6.Text, "E: there is some thing error.\n", er, "\n");
+                textBox6.Text = string.Concat(textBox6.Text, "E: Something went wrong.\n", er, "\n");
                 textBox6.Text = string.Concat(textBox6.Text, "\n****************************************\n");
                 MessageBox.Show("Unexpected error!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -198,7 +198,7 @@ namespace Newton_Method
                 }
                 if (Math.Abs(x1 - x0) <= epsillon)
                 {
-                    textBox6.Text = string.Concat(textBox6.Text, "O: |x", iter, " - x", iter - 1, "| = ", Math.Abs(x1 - x0), " < ε.", "\n");
+                    textBox6.Text = string.Concat(textBox6.Text, "O: |x", iter, " - x", iter - 1, "| = ", Math.Abs(x1 - x0), " <= ε.", "\n");
                     textBox6.Text = string.Concat(textBox6.Text, "O: x", iter, " = ", x1, " is a root of the function.\n");
                     textBox6.Text = string.Concat(textBox6.Text, "O: ε = ", epsillon, "\n");
                     textBox6.Text = string.Concat(textBox6.Text, "O: Number of iteration = ", iter, ".\n");
@@ -208,7 +208,7 @@ namespace Newton_Method
                     return iter;
                 }
                 textBox6.Text = string.Concat(textBox6.Text, "O: f(x", iter, ") = ", f(x1, Oprand, Operation), " .\n");
-                textBox6.Text = string.Concat(textBox6.Text, "O: |x", iter, " - x", iter - 1, "| = ", Math.Abs(x1 - x0), " > ε so we well do another iteration.\n");
+                textBox6.Text = string.Concat(textBox6.Text, "O: |x", iter, " - x", iter - 1, "| = ", Math.Abs(x1 - x0), " > ε so we will do another iteration.\n");
                 iter++;
                 x0 = x1;
             } while (iter <= 100);
@@ -253,7 +253,7 @@ namespace Newton_Method
                     return Math.Abs(x1 - x0);
                 }
                 textBox6.Text = string.Concat(textBox6.Text, "O: f(x", iter, ") = ", f(x1, Oprand, Operation), " .\n");
-                textBox6.Text = string.Concat(textBox6.Text, "O: iteration = ", iter, " < iteration max so we well do another iteration.\n");
+                textBox6.Text = string.Concat(textBox6.Text, "O: iteration = ", iter, " < iteration max so we will do another iteration.\n");
                 iter++;
                 x0 = x1;
             } while (err != 3);
@@ -477,9 +477,9 @@ namespace Newton_Method
             string[] tmp1 = new string[99999];
             if (D.Count != O.Count + 1)
             {
-                textBox6.Text = string.Concat(textBox6.Text, "E Function type is ununderstandable Please retype the function.\n");
+                textBox6.Text = string.Concat(textBox6.Text, "E: Function type is not understandable, please retype the function.\n");
                 textBox6.Text = string.Concat(textBox6.Text, "\n****************************************\n");
-                MessageBox.Show("Function type is ununderstandable!\nPlease retype the function.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Function type is not understandable!\nPlease retype the function.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             for (int j = 0; D.Count != 0; j++)
@@ -488,16 +488,16 @@ namespace Newton_Method
                 if (tmp1[j] == "x") { }
                 else if (Math.Abs(double.Parse(tmp1[j])) < epsillon)
                 {
-                    textBox6.Text = string.Concat(textBox6.Text, "E: Zero causes problem in calculation, please remove all zero from the function.\n");
+                    textBox6.Text = string.Concat(textBox6.Text, "E: Zero causes problems in calculation, please remove all zeros from the function.\n");
                     textBox6.Text = string.Concat(textBox6.Text, "\n****************************************\n");
-                    MessageBox.Show("Please remove all zero!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Please remove all zeros!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
             }
             if (textBox1.Text.Contains("x")) { }
             else
             {
-                textBox6.Text = string.Concat(textBox6.Text, "E: The function must related to x only,.\n");
+                textBox6.Text = string.Concat(textBox6.Text, "E: The function must be related to x only.\n");
                 textBox6.Text = string.Concat(textBox6.Text, "\n****************************************\n");
                 MessageBox.Show("This is not a function!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
