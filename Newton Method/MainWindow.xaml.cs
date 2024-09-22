@@ -307,7 +307,7 @@ namespace Newton_Method
 
         private bool read(ref Stack<string> Oprand, ref Stack<string> Operation)
         {
-            string line = textBox1.Text;
+            string line = textBox1.Text.Replace(" ", "").Replace('X', 'x');
             tmp1 = null;
             for (int i = 0; i < line.Length; i++)
             {
@@ -508,7 +508,7 @@ namespace Newton_Method
                     return false;
                 }
             }
-            if (textBox1.Text.Contains("x")) { }
+            if (textBox1.Text.Contains("x") || textBox1.Text.Contains("X")) { }
             else
             {
                 textBox6.Text = string.Concat(textBox6.Text, "E: The function must be related to x only.\n");
