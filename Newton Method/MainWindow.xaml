@@ -35,6 +35,6 @@
             <TextBox Background="{x:Null}" FontSize="15" Height="Auto" IsReadOnly="False" Margin="38,3,72,0" Name="textBox4" VerticalAlignment="Top" Grid.Column="1" />
             <Label Content="To:" FontFamily="Segoe UI" FontSize="16" FontWeight="Normal" Height="Auto" HorizontalAlignment="Left" Margin="1,0,0,0" Name="label6" VerticalAlignment="Top" Width="31" Grid.Column="1" />
         </Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="15,0,0,5" TextWrapping="Wrap" Text="Dr.Mohammad@outlook.com" VerticalAlignment="Bottom" FontSize="20" Foreground="#FF3A00FF"/>
+        <TextBlock HorizontalAlignment="Left" Margin="15,0,0,5" TextWrapping="Wrap" Text="mohammad.diab93@outlook.com" VerticalAlignment="Bottom" FontSize="20" Foreground="#FF3A00FF"/>
     </Grid>
 </Window>
