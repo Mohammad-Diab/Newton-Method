@@ -122,7 +122,7 @@ namespace Newton_Method
                                     }
                                     if (err == 0)
                                     {
-                                        MessageBox.Show("Done.", "Newton Method", MessageBoxButton.OK, MessageBoxImage.Information);
+                                        MessageBox.Show(string.Concat("Done.\nx = ", root), "Newton Method", MessageBoxButton.OK, MessageBoxImage.Information);
                                         textBox6.Text = string.Concat(textBox6.Text, "Done.\n****************************************\n");
                                     }
                                     else if (err == 2)
@@ -133,14 +133,14 @@ namespace Newton_Method
                                     else if (err == 1)
                                     {
                                         textBox6.Text = string.Concat(textBox6.Text, "Done.\n****************************************\n");
-                                        MessageBox.Show("Done.", "Newton Method", MessageBoxButton.OK, MessageBoxImage.Information);
+                                        MessageBox.Show(string.Concat("Done.\nx = ", root), "Newton Method", MessageBoxButton.OK, MessageBoxImage.Information);
                                     }
                                 }
                                 else if (x1 == 0 || x2 == 0)
                                 {
                                     textBox6.Text = string.Concat(textBox6.Text, " = 0 so x = ", x1 == 0 ? textBox3.Text : textBox4.Text, " is a root of the function.\n");
                                     textBox6.Text = string.Concat(textBox6.Text, "Done.\n****************************************\n");
-                                    MessageBox.Show("Done.", "Newton Method", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    MessageBox.Show(string.Concat("Done.\nx = ", x1 == 0 ? textBox3.Text : textBox4.Text), "Newton Method", MessageBoxButton.OK, MessageBoxImage.Information);
                                 }
                                 else
                                 {
