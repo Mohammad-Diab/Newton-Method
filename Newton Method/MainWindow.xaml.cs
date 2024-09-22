@@ -476,7 +476,7 @@ namespace Newton_Method
                 MessageBox.Show("Function type is ununderstandable!\nPlease retype the function.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-            for (int j = 0; j < D.Count; j++)
+            for (int j = 0; D.Count != 0; j++)
             {
                 tmp1[j] = D.Pop();
                 if (tmp1[j] == "x") { }
