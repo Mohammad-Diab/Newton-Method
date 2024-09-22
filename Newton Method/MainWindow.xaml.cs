@@ -159,6 +159,12 @@ namespace Newton_Method
                     MessageBox.Show("Please complete all necessary fields!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+            catch (FormatException)
+            {
+                textBox6.Text = string.Concat(textBox6.Text, "E: ε, Domain, Iter-Max and the numbers in the function must be valid numbers.\n");
+                textBox6.Text = string.Concat(textBox6.Text, "\n****************************************\n");
+                MessageBox.Show("Please write valid numbers!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
             catch (Exception er)
             {
                 textBox6.Text = string.Concat(textBox6.Text, "E: there is some thing error.\n", er, "\n");
