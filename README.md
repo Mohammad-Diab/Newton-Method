@@ -8,7 +8,15 @@ A small Windows app that finds a root of an equation f(x) = 0 with Newton's meth
 - Set the search interval with **Domain** (**From** / **To**).
 - Stop either by precision (**ε**, up to 0.025) or after a fixed number of iterations (**Iter-Max**, 1 to 100): fill one of the two. With ε it gives up after 100 iterations.
 - **Newton** checks that f(a) · f(b) < 0, picks the starting point x0 from the sign of f · f'' at the ends of the interval, then iterates x(n+1) = x(n) − f(x(n)) / f'(x(n)) and reports the root, the number of iterations and |f(x)|.
-- Every step is written to the log box; **Clear History** empties it.
+- Every step is written to the log box, with a warning when a step lands outside the domain; **Clear History** empties it.
+
+## Writing the function
+
+- Spaces are ignored and `X` is the same as `x`.
+- `^` is applied first (right to left), then `*` and `/`, then `+` and `-`.
+- No parentheses, no leading minus and no negative numbers: write `x^2-4`, not `-4+x^2`.
+- The number 0 on its own is refused (`x^2+0*x-4`); numbers like `0.5` are fine.
+- **√x** and **∛x** add `^0.5` and `^0.33333333333`, so they apply only to the number or x just before them: `2*x+1` followed by **√x** gives `2*x+1^0.5`, not √(2x+1).
 
 ## Requirements
 
