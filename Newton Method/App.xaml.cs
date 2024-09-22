@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 
-namespace Newton
+namespace Newton_Method
 {
     /// <summary>
     /// Interaction logic for App.xaml

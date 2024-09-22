@@ -1,7 +1,7 @@
-﻿<Window x:Class="Newton.MainWindow"
+﻿<Window x:Class="Newton_Method.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Newton Method" Height="444" Width="500" FlowDirection="LeftToRight" WindowStartupLocation="CenterScreen" Icon="/Newton;component/Images/Project1.ico" MinWidth="500" MinHeight="370">
+        Title="Newton Method" Height="444" Width="500" FlowDirection="LeftToRight" WindowStartupLocation="CenterScreen" Icon="Images/Project1.ico" MinWidth="500" MinHeight="370">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="AliceBlue" Offset="0" />
