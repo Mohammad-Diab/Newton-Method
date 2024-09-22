@@ -187,7 +187,7 @@ namespace Newton_Method
             do
             {
                 double d1x0 = Math.Abs(df(x0, Oprand, Operation));
-                if (d1x0 < epsillon)
+                if (d1x0 == 0 || double.IsNaN(d1x0) || double.IsInfinity(d1x0))
                 {
                     textBox6.Text = string.Concat(textBox6.Text, "O: |f'(x0)| = ", d1x0, " this equation can not be solved in Newton Method.\n");
                     err = 2;
@@ -226,13 +226,12 @@ namespace Newton_Method
 
         private double Solve(double x0, ref int err, int iter, int iter_Max, ref double root, Stack<string> Oprand, Stack<string> Operation)
         {
-            double epsillon = Double.Epsilon;
             double x1 = 0;
             iter = 1;
             do
             {
                 double d1x0 = Math.Abs(df(x0, Oprand, Operation));
-                if (d1x0 < epsillon)
+                if (d1x0 == 0 || double.IsNaN(d1x0) || double.IsInfinity(d1x0))
                 {
                     textBox6.Text = string.Concat(textBox6.Text, "O: |f'(x0)| = ", d1x0, " this equation can not be solved in Newton Method.\n");
                     err = 2;
