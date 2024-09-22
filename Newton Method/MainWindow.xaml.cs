@@ -183,6 +183,8 @@ namespace Newton_Method
         private int Solve(double x0, double epsillon, ref int err, int iter, ref double root, Stack<string> Oprand, Stack<string> Operation)
         {
             double x1 = 0;
+            double a = Math.Min(double.Parse(textBox3.Text), double.Parse(textBox4.Text));
+            double b = Math.Max(double.Parse(textBox3.Text), double.Parse(textBox4.Text));
             iter = 1;
             do
             {
@@ -203,6 +205,8 @@ namespace Newton_Method
                     err = 2;
                     return -100;
                 }
+                if (x1 < a || x1 > b)
+                    textBox6.Text = string.Concat(textBox6.Text, "W: x", iter, " = ", x1, " is outside the domain [", a, ", ", b, "].\n");
                 if (Math.Abs(x1 - x0) <= epsillon)
                 {
                     textBox6.Text = string.Concat(textBox6.Text, "O: |x", iter, " - x", iter - 1, "| = ", Math.Abs(x1 - x0), " <= ε.", "\n");
@@ -227,6 +231,8 @@ namespace Newton_Method
         private double Solve(double x0, ref int err, int iter, int iter_Max, ref double root, Stack<string> Oprand, Stack<string> Operation)
         {
             double x1 = 0;
+            double a = Math.Min(double.Parse(textBox3.Text), double.Parse(textBox4.Text));
+            double b = Math.Max(double.Parse(textBox3.Text), double.Parse(textBox4.Text));
             iter = 1;
             do
             {
@@ -247,6 +253,8 @@ namespace Newton_Method
                     err = 2;
                     return -100;
                 }
+                if (x1 < a || x1 > b)
+                    textBox6.Text = string.Concat(textBox6.Text, "W: x", iter, " = ", x1, " is outside the domain [", a, ", ", b, "].\n");
                 if (iter == iter_Max)
                 {
                     textBox6.Text = string.Concat(textBox6.Text, "O: iteration = ", iter, " = iteration max.\n");
