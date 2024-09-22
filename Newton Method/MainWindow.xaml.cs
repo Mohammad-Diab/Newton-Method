@@ -184,6 +184,12 @@ namespace Newton_Method
                     textBox6.Text = string.Concat(textBox6.Text, "O: |f'(x0)| = ", d1x0, " > 0 this equation can be solved in Newton Method.\n");
                 x1 = x0 - (f(x0, Oprand, Operation) / df(x0, Oprand, Operation));
                 textBox6.Text = string.Concat(textBox6.Text, "O: x", iter, " = x", iter - 1, " -[f(x", iter - 1, ") / f'(x", iter - 1, ")] = ", x1, "\n");
+                if (double.IsNaN(x1) || double.IsInfinity(x1))
+                {
+                    textBox6.Text = string.Concat(textBox6.Text, "O: x", iter, " is not a number, this equation can not be solved in Newton Method.\n");
+                    err = 2;
+                    return -100;
+                }
                 if (Math.Abs(x1 - x0) <= epsillon)
                 {
                     textBox6.Text = string.Concat(textBox6.Text, "O: |x", iter, " - x", iter - 1, "| = ", Math.Abs(x1 - x0), " < ε.", "\n");
@@ -199,7 +205,9 @@ namespace Newton_Method
                 textBox6.Text = string.Concat(textBox6.Text, "O: |x", iter, " - x", iter - 1, "| = ", Math.Abs(x1 - x0), " > ε so we well do another iteration.\n");
                 iter++;
                 x0 = x1;
-            } while (err != 3);
+            } while (iter <= 100);
+            textBox6.Text = string.Concat(textBox6.Text, "O: |x", iter - 1, " - x", iter - 2, "| is still > ε after 100 iterations, this equation can not be solved in Newton Method.\n");
+            err = 2;
             return -100;
         }
 
@@ -221,6 +229,12 @@ namespace Newton_Method
                     textBox6.Text = string.Concat(textBox6.Text, "O: |f'(x0)| = ", d1x0, " > 0 this equation can be solved in Newton Method.\n");
                 x1 = x0 - (f(x0, Oprand, Operation) / df(x0, Oprand, Operation));
                 textBox6.Text = string.Concat(textBox6.Text, "O: x", iter, " = x", iter - 1, " -[f(x", iter - 1, ") / f'(x", iter - 1, ")] = ", x1, "\n");
+                if (double.IsNaN(x1) || double.IsInfinity(x1))
+                {
+                    textBox6.Text = string.Concat(textBox6.Text, "O: x", iter, " is not a number, this equation can not be solved in Newton Method.\n");
+                    err = 2;
+                    return -100;
+                }
                 if (iter == iter_Max)
                 {
                     textBox6.Text = string.Concat(textBox6.Text, "O: iteration = ", iter, " = iteration max.\n");
