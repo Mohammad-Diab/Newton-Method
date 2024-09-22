@@ -242,24 +242,21 @@ namespace Newton_Method
 
         private double f(double x0, Stack<string> Oprand, Stack<string> Operation)
         {
-            CopyStack(ref Oprand, ref Operation);
-            double result = 0;
-            for (int i = 0; i > -2; i++)
-            {
-                if (Operation.Count > 0)
-                {
-                    string op = Operation.Pop();
-                    string a = Oprand.Pop();
-                    string b = Oprand.Pop();
-                    Findfx(op, a, b, x0, ref Oprand, ref Operation);
-                }
+            List<string> D = new List<string>(tmpD);
+            List<string> O = new List<string>(tmpO);
+            D.Reverse();
+            O.Reverse();
+            for (int i = O.Count - 1; i >= 0; i--)
+                if (O[i] == "^")
+                    Findfx(i, x0, D, O);
+            for (int i = 0; i < O.Count; )
+                if (O[i] == "*" || O[i] == "/")
+                    Findfx(i, x0, D, O);
                 else
-                {
-                    result = Assignment(Oprand.Pop(), x0);
-                    break;
-                }
-            }
-            return result;
+                    i++;
+            while (O.Count > 0)
+                Findfx(0, x0, D, O);
+            return Assignment(D[0], x0);
         }
 
         private double df(double x0, Stack<string> Oprand, Stack<string> Operation, double epsillon)
@@ -316,101 +313,32 @@ namespace Newton_Method
             return true;
         }
 
-        private void Findfx(string op, string a, string b, double x0, ref Stack<string> Oprand, ref Stack<string> Operation)
+        private void Findfx(int i, double x0, List<string> D, List<string> O)
         {
-            switch (op)
+            string a = D[i + 1];
+            string b = D[i];
+            double result = 0;
+            switch (O[i])
             {
                 case "^":
-                    Oprand.Push(Power(a, b, x0).ToString());
+                    result = Power(a, b, x0);
                     break;
                 case "*":
-                    if ((Operation.Count != 0 && Operation.Peek() != "^" && Operation.Peek() != "/") || Operation.Count == 0)
-                        Oprand.Push(Multiple(a, b, x0).ToString());
-                    else
-                    {
-                        Oprand.Push(b);
-                        string c = a;
-                        a = Oprand.Pop();
-                        b = Oprand.Pop();
-                        Oprand.Push(c);
-                        string d = op;
-                        op = Operation.Pop();
-                        Operation.Push(d);
-                        if (op == "/")
-                            Exchanger(Division(a, b, x0).ToString(), Oprand);
-                        else
-                            Exchanger(Power(a, b, x0).ToString(), Oprand);
-                    }
+                    result = Multiple(a, b, x0);
                     break;
                 case "/":
-                    if ((Operation.Count != 0 && Operation.Peek() != "^" && Operation.Peek() != "*") || Operation.Count == 0)
-                        Oprand.Push(Division(a, b, x0).ToString());
-                    else
-                    {
-                        Oprand.Push(b);
-                        string c = a;
-                        a = Oprand.Pop();
-                        b = Oprand.Pop();
-                        Oprand.Push(c);
-                        string d = op;
-                        op = Operation.Pop();
-                        Operation.Push(d);
-                        if (op == "*")
-                            Exchanger(Multiple(a, b, x0).ToString(), Oprand);
-                        else
-                            Exchanger(Power(a, b, x0).ToString(), Oprand);
-                    }
+                    result = Division(a, b, x0);
                     break;
                 case "+":
-                    if ((Operation.Count != 0 && Operation.Peek() != "^" && Operation.Peek() != "*" && Operation.Peek() != "/") || Operation.Count == 0)
-                        if (Operation.Count != 0 && Operation.Peek() == "-")
-                            Oprand.Push(Minus(a, b, x0).ToString());
-                        else
-                            Oprand.Push(Plus(a, b, x0).ToString());
-                    else
-                    {
-                        Oprand.Push(b);
-                        string c = a;
-                        a = Oprand.Pop();
-                        b = Oprand.Pop();
-                        Oprand.Push(c);
-                        string d = op;
-                        op = Operation.Pop();
-                        Operation.Push(d);
-                        if (op == "*")
-                            Oprand.Push(Multiple(a, b, x0).ToString());
-                        else if (op == "^")
-                            Exchanger(Power(a, b, x0).ToString(), Oprand);
-                        else
-                            Exchanger(Division(a, b, x0).ToString(), Oprand);
-                    }
-
+                    result = Plus(a, b, x0);
                     break;
                 case "-":
-                    if ((Operation.Count != 0 && Operation.Peek() != "^" && Operation.Peek() != "*" && Operation.Peek() != "/") || Operation.Count == 0)
-                        if (Operation.Count != 0 && Operation.Peek() == "-")
-                            Oprand.Push(Plus(a, b, x0).ToString());
-                        else
-                            Oprand.Push(Minus(a, b, x0).ToString());
-                    else
-                    {
-                        Oprand.Push(b);
-                        string c = a;
-                        a = Oprand.Pop();
-                        b = Oprand.Pop();
-                        Oprand.Push(c);
-                        string d = op;
-                        op = Operation.Pop();
-                        Operation.Push(d);
-                        if (op == "*")
-                            Exchanger(Multiple(a, b, x0).ToString(), Oprand);
-                        else if (op == "^")
-                            Exchanger(Power(a, b, x0).ToString(), Oprand);
-                        else
-                            Exchanger(Division(a, b, x0).ToString(), Oprand);
-                    }
+                    result = Minus(a, b, x0);
                     break;
             }
+            D[i] = result.ToString("R");
+            D.RemoveAt(i + 1);
+            O.RemoveAt(i);
         }
 
         private double Power(string a, string b, double x0)
@@ -489,13 +417,6 @@ namespace Newton_Method
                 return x0;
             else
                 return double.Parse(a);
-        }
-
-        private void Exchanger(string a, Stack<string> Oprand)
-        {
-            string tmp = Oprand.Pop();
-            Oprand.Push(a);
-            Oprand.Push(tmp);
         }
 
         private bool Xor(bool ex1, bool ex2)
