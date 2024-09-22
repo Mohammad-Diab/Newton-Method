@@ -288,6 +288,7 @@ namespace Newton_Method
         private bool read(ref Stack<string> Oprand, ref Stack<string> Operation)
         {
             string line = textBox1.Text;
+            tmp1 = null;
             for (int i = 0; i < line.Length; i++)
             {
                 if (line[i] >= 48 && line[i] <= 57)
